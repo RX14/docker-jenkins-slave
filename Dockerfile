@@ -12,4 +12,4 @@ ADD slave.jar /jenkins-slave/
 MAINTAINER rx14
 WORKDIR /jenkins-slave/root
 VOLUME ["/jenkins-slave/root"]
-ENTRYPOINT ["java", "-jar", "/jenkins-slave/slave.jar"]
+ENTRYPOINT ["java", "-jar", "/jenkins-slave/slave.jar", "-jar-cache", "/jenkins-slave/root/cache/"]
