@@ -1,15 +1,15 @@
 FROM debian:wheezy
-MAINTAINER rx14
 
 RUN apt-get update && apt-get install -y openjdk-7-jre-headless
 
-ADD slave.jar /jenkins-slave/
 
 RUN useradd jenkins
+RUN mkdir -p /jenkins-slave/root && chown -R jenkins /jenkins-slave/
 USER jenkins
 
-RUN mkdir /jenkins-slave/root
+ADD slave.jar /jenkins-slave/
 
-WORKDIR /jenkins-slave/
+MAINTAINER rx14
+WORKDIR /jenkins-slave/root
 VOLUME ["/jenkins-slave/root"]
 ENTRYPOINT ["java", "-jar", "/jenkins-slave/slave.jar"]
