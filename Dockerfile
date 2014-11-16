@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM debian:wheezy
 MAINTAINER rx14
 
 RUN apt-get update && apt-get install -y openjdk-7-jre-headless
