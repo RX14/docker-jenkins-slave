@@ -7,8 +7,8 @@ RUN apt-get install -y git
 
 RUN useradd -m -d /jenkins-slave/ jenkins
 ADD slave.jar /
-USER jenkins
+ADD run.sh /
 
 MAINTAINER rx14
 WORKDIR /jenkins-slave
-ENTRYPOINT ["java", "-jar", "/slave.jar"]
+ENTRYPOINT ["/run.sh"]
