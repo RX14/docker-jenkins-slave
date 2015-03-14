@@ -1,14 +1,12 @@
-FROM debian:wheezy
+FROM jeanblanchard/busybox-java:8
 
-RUN apt-get update && apt-get install -y openjdk-7-jre-headless
+RUN opkg-install curl wget git
 
-#Preinstalled tools
-RUN apt-get install -y git wget
-
-RUN useradd -m -d /jenkins-slave/ jenkins
+RUN adduser -Dh /jenkins-slave/ -u 9001 jenkins && chown -R jenkins /jenkins-slave/
+VOLUME /jenkins-slave/
+USER jenkins
 ADD slave.jar /
-ADD run.sh /
 
 MAINTAINER rx14
-WORKDIR /jenkins-slave
-ENTRYPOINT ["/run.sh"]
+WORKDIR /jenkins-slave/
+ENTRYPOINT ["/opt/jdk/bin/java", "-Dfile.encoding=UTF-8", "-jar", "/slave.jar"]
