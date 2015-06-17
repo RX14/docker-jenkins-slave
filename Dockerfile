@@ -1,5 +1,6 @@
 FROM jeanblanchard/busybox-java:8
 
+RUN sed -i 's#x86_64/generic#x86/64#g' /etc/opkg.conf
 RUN opkg-install curl wget git
 
 RUN adduser -Dh /jenkins-slave/ -u 9001 jenkins && chown -R jenkins /jenkins-slave/
